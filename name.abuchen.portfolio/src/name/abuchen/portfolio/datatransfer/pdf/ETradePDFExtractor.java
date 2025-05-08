@@ -53,7 +53,7 @@ public class ETradePDFExtractor extends AbstractPDFExtractor
                         // Grant Date Market Value $215.590000
                         // @formatter:on
                         .section("name", "nameContinued", "tickerSymbol", "currency") //
-                        .match("^Company Name \\(Symbol\\) (?<name>.*),.*$") //
+                        .match("^Company Name \\(Symbol\\) (?<name>.*) Beginning Balance .*$") //
                         .match("^(?<nameContinued>.*)\\((?<tickerSymbol>[A-Z0-9]{1,6}(?:\\.[A-Z]{1,4})?)\\) Shares Purchased [\\.,\\d]+$") //
                         .match("^Grant Date Market Value (?<currency>\\p{Sc})[\\.,\\d]+$") //
                         .assign((t, v) -> t.setSecurity(getOrCreateSecurity(v)))

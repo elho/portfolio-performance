@@ -53,7 +53,7 @@ public class ETradePDFExtractorTest
         // check security
         assertThat(results, hasItem(security( //
                         hasIsin(null), hasWkn(null), hasTicker("NXPI"), //
-                        hasName("NXP SEMICONDUCTORS N.V."), //
+                        hasName("NXP SEMICONDUCTORS, N.V."), //
                         hasCurrencyCode("USD"))));
 
         // check buy sell transaction
