@@ -13,10 +13,9 @@ import static name.abuchen.portfolio.datatransfer.ExtractorMatchers.hasSource;
 import static name.abuchen.portfolio.datatransfer.ExtractorMatchers.hasTaxes;
 import static name.abuchen.portfolio.datatransfer.ExtractorMatchers.hasTicker;
 import static name.abuchen.portfolio.datatransfer.ExtractorMatchers.hasWkn;
-import static name.abuchen.portfolio.datatransfer.ExtractorMatchers.purchase;
+import static name.abuchen.portfolio.datatransfer.ExtractorMatchers.inboundDelivery;
 import static name.abuchen.portfolio.datatransfer.ExtractorMatchers.security;
 import static name.abuchen.portfolio.datatransfer.ExtractorTestUtilities.countAccountTransactions;
-import static name.abuchen.portfolio.datatransfer.ExtractorTestUtilities.countBuySell;
 import static name.abuchen.portfolio.datatransfer.ExtractorTestUtilities.countSecurities;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
@@ -37,18 +36,17 @@ import name.abuchen.portfolio.model.Client;
 public class ETradePDFExtractorTest
 {
     @Test
-    public void testSecurityBuy01()
+    public void testSecurityInboundDelivery01()
     {
         var extractor = new ETradePDFExtractor(new Client());
 
         List<Exception> errors = new ArrayList<>();
 
-        var results = extractor.extract(PDFInputFile.loadTestCase(getClass(), "Buy01.txt"), errors);
+        var results = extractor.extract(PDFInputFile.loadTestCase(getClass(), "InboundDelivery01.txt"), errors);
 
         assertThat(errors, empty());
         assertThat(countSecurities(results), is(1L));
-        assertThat(countBuySell(results), is(1L));
-        assertThat(countAccountTransactions(results), is(0L));
+        assertThat(countAccountTransactions(results), is(1L));
         assertThat(results.size(), is(2));
         new AssertImportActions().check(results, "USD");
 
@@ -59,9 +57,9 @@ public class ETradePDFExtractorTest
                         hasCurrencyCode("USD"))));
 
         // check buy sell transaction
-        assertThat(results, hasItem(purchase( //
+        assertThat(results, hasItem(inboundDelivery( //
                         hasDate("2025-02-28T00:00"), hasShares(5.2350), //
-                        hasSource("Buy01.txt"), //
+                        hasSource("InboundDelivery01.txt"), //
                         hasNote("Taxable Gain $169.30"), //
                         hasAmount("USD", 959.31), hasGrossValue("USD", 959.31), //
                         hasTaxes("USD", 0.00), hasFees("USD", 0.00))));

@@ -6,7 +6,6 @@ import name.abuchen.portfolio.datatransfer.ExtractorUtils;
 import name.abuchen.portfolio.datatransfer.pdf.PDFParser.Block;
 import name.abuchen.portfolio.datatransfer.pdf.PDFParser.DocumentType;
 import name.abuchen.portfolio.datatransfer.pdf.PDFParser.Transaction;
-import name.abuchen.portfolio.model.BuySellEntry;
 import name.abuchen.portfolio.model.Client;
 import name.abuchen.portfolio.model.PortfolioTransaction;
 import name.abuchen.portfolio.money.Values;
@@ -20,7 +19,7 @@ public class ETradePDFExtractor extends AbstractPDFExtractor
 
         addBankIdentifier("E*TRADE Securities LLC");
 
-        addBuySellTransaction();
+        addDeliveryInOutBoundTransaction();
     }
 
     @Override
@@ -29,12 +28,12 @@ public class ETradePDFExtractor extends AbstractPDFExtractor
         return "E*TRADE Securities LLC";
     }
 
-    private void addBuySellTransaction()
+    private void addDeliveryInOutBoundTransaction()
     {
         var type = new DocumentType("Purchase Summary");
         this.addDocumentTyp(type);
 
-        var pdfTransaction = new Transaction<BuySellEntry>();
+        var pdfTransaction = new Transaction<PortfolioTransaction>();
 
         var firstRelevantLine = new Block("^EMPLOYEE STOCK PLAN PURCHASE CONFIRMATION$");
         type.addBlock(firstRelevantLine);
@@ -43,8 +42,8 @@ public class ETradePDFExtractor extends AbstractPDFExtractor
         pdfTransaction //
 
                         .subject(() -> {
-                            var portfolioTransaction = new BuySellEntry();
-                            portfolioTransaction.setType(PortfolioTransaction.Type.BUY);
+                            var portfolioTransaction = new PortfolioTransaction();
+                            portfolioTransaction.setType(PortfolioTransaction.Type.DELIVERY_INBOUND);
                             return portfolioTransaction;
                         })
 
@@ -71,7 +70,7 @@ public class ETradePDFExtractor extends AbstractPDFExtractor
                         // @formatter:on
                         .section("date") //
                         .match("^Purchase Date (?<date>[\\d]{2}\\-[\\d]{2}\\-[\\d]{4})$") //
-                        .assign((t, v) -> t.setDate(asDate(v.get("date"))))
+                        .assign((t, v) -> t.setDateTime(asDate(v.get("date"))))
 
                         // @formatter:off
                         // Total Price ($959.31)
@@ -90,7 +89,7 @@ public class ETradePDFExtractor extends AbstractPDFExtractor
                         .match("^(?<note>Taxable Gain .*)$") //
                         .assign((t, v) -> t.setNote(trim(v.get("note"))))
 
-                        .wrap(BuySellEntryItem::new);
+                        .wrap(TransactionItem::new);
     }
 
     @Override
