@@ -47,29 +47,40 @@ public class ETradePDFExtractor extends AbstractPDFExtractor
                             return portfolioTransaction;
                         })
 
-                        // @formatter:off
-                        // Company Name (Symbol) NXP SEMICONDUCTORS, Beginning Balance 0.0000
-                        // N.V.(NXPI) Shares Purchased 5.2350
-                        // Grant Date Market Value $215.590000
-                        // @formatter:on
-                        .section("name", "nameContinued", "tickerSymbol", "currency") //
-                        .match("^Company Name \\(Symbol\\) (?<name>.*) Beginning Balance .*$") //
-                        .match("^(?<nameContinued>.*)\\((?<tickerSymbol>[A-Z0-9]{1,6}(?:\\.[A-Z]{1,4})?)\\) Shares Purchased [\\.,\\d]+$") //
-                        .match("^Grant Date Market Value (?<currency>\\p{Sc})[\\.,\\d]+$") //
-                        .assign((t, v) -> t.setSecurity(getOrCreateSecurity(v)))
+                        .oneOf( //
+                                        // @formatter:off
+                                        // Company Name (Symbol) NETAPP,  INC.(NTAP) Beginning Balance 60.0000
+                                        // Grant Date Market Value $71.960000
+                                        // @formatter:on
+                                        section -> section //
+                                                        .attributes("name", "tickerSymbol", "currency") //
+                                                        .match("^Company Name \\(Symbol\\) (?<name>.*)\\((?<tickerSymbol>[A-Z0-9]{1,6}(?:\\.[A-Z]{1,4})?)\\) Beginning Balance .*$") //
+                                                        .match("^Grant Date Market Value (?<currency>\\p{Sc})[\\.,\\d]+$") //
+                                                        .assign((t, v) -> t.setSecurity(getOrCreateSecurity(v))),
+                                        // @formatter:off
+                                        // Company Name (Symbol) NXP SEMICONDUCTORS, Beginning Balance 0.0000
+                                        // N.V.(NXPI) Shares Purchased 5.2350
+                                        // Grant Date Market Value $215.590000
+                                        // @formatter:on
+                                        section -> section //
+                                                        .attributes("name", "nameContinued", "tickerSymbol", "currency") //
+                                                        .match("^Company Name \\(Symbol\\) (?<name>.*) Beginning Balance .*$") //
+                                                        .match("^(?<nameContinued>.*)\\((?<tickerSymbol>[A-Z0-9]{1,6}(?:\\.[A-Z]{1,4})?)\\) Shares Purchased [\\.,\\d]+$") //
+                                                        .match("^Grant Date Market Value (?<currency>\\p{Sc})[\\.,\\d]+$") //
+                                                        .assign((t, v) -> t.setSecurity(getOrCreateSecurity(v))))
 
                         // @formatter:off
                         // N.V.(NXPI) Shares Purchased 5.2350
                         // @formatter:on
                         .section("shares") //
-                        .match("^.*\\([\\w]{3,4}\\) Shares Purchased (?<shares>[\\.,\\d]+)$") //
+                        .match("^.* Shares Purchased (?<shares>[\\.,\\d]+)$") //
                         .assign((t, v) -> t.setShares(asShares(v.get("shares"))))
 
                         // @formatter:off
                         // Purchase Date 02-28-2025
                         // @formatter:on
                         .section("date") //
-                        .match("^Purchase Date (?<date>[\\d]{2}\\-[\\d]{2}\\-[\\d]{4})$") //
+                        .match("^Purchase Date (?<date>[\\d]{2}\\-[\\d]{2}\\-[\\d]{4})( .*)?$") //
                         .assign((t, v) -> t.setDateTime(asDate(v.get("date"))))
 
                         // @formatter:off

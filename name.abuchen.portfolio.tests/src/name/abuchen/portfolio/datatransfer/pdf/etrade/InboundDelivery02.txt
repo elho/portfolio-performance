@@ -1,0 +1,37 @@
+PDFBox Version: 3.0.3
+Portfolio Performance Version: 0.75.2.202504171749
+System: linux | x86_64 | 21.0.7+8-LTS-245 | Oracle Corporation
+-----------------------------------------
+EMPLOYEE STOCK PLAN PURCHASE CONFIRMATION
+Provided by NETAPP,  INC.
+MAX MUSTERMANN Employee ID: 123456
+STREET
+12
+12345
+CITY,  DE
+ Purchase Summary
+Account Number 123456789 Shares Purchased to Date in Current Offering
+Company Name (Symbol) NETAPP,  INC.(NTAP) Beginning Balance 60.0000
+Plan 12 Shares Purchased 44.0000
+Grant Date 06-01-2023 Total shares Purchased for Offering 104.0000
+Purchase Begin Date 06-03-2024 Shares Deposited in STREETNAME to 104.0000
+Purchase Date 11-29-2024 Morgan Stanley Smith Barney
+ Purchase Details
+Contributions
+Previous Carry Forward $0.00
+Current Contributions $2,702.94
+Total Contributions $2,702.94 Calculation of Shares Purchased
+Grant Date Market Value $71.960000
+Total Price ($2,691.30) Purchase Value per Share $122.640000
+Amount Refunded ($11.64) Purchase Price per Share
+        (85.000% of $71.960000) $61.166000
+Calculation of Gain Total Price
+Total Value $5,396.16          (Shares Purchased x Purchase Price) $2,691.304000
+Total Price ($2,691.30)
+Taxable Gain $2,704.86
+This information was provided to E*TRADE Securities LLC, a subsidiary of Morgan Stanley, ("E*TRADE") by your company. E*TRADE does not guarantee the accuracy
+or completeness of the information provided by your company. If a sale is associated with these shares, the trade confirmation provided by E*TRADE Securities LLC is
+the only accurate record of the sale transaction.
+The data shown on this statement is based on your company's records. The company reserves the right to make corrections to this data. The purchase shown on this
+statement is subject to the terms of the plan under which the purchase was made.
+12/04/2024 04:46:20 AM ET Page 1 of 1
