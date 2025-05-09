@@ -1,0 +1,42 @@
+PDFBox Version: 3.0.3
+Portfolio Performance Version: 0.75.2.202504172335
+System: linux | x86_64 | 21.0.7+8-LTS-245 | Oracle Corporation
+-----------------------------------------
+EMPLOYEE STOCK PLAN EXERCISE CONFIRMATION
+MAX MUSTERMANN Employee ID: 123456
+STREET
+12
+12345
+CITY,
+ Order Summary
+Order Number 123456789 Total Price ($313.44)
+Account Stock Plan (NTAP) -1234 Commission ($0.00)
+Order Type Cash Exercise Sec Fee ($0.00)
+Company Name (Symbol) NETAPP,  INC.(NTAP) Broker Assist Fee ($0.00)
+Shares Exercised 16 Disbursement Fee ($0.00)
+Shares Issued 16 Taxes Withheld ($356.66)
+Price Type N/A Appreciation Shares / Value 0 / $0.00 (USD)
+Tax Shares / Value 0 / $0.00(USD)
+Shares to Keep 16
+ Exercise Details
+Exercise Date: 04/14/2025 Exercise Type: Cash Exercise Registration:
+Grant 1
+Grant Date 12/12/2021
+Grant Number IN211
+Grant Type Nonqual
+Grant Price $19.59
+Exercise Market Value $83.28
+Shares Exercised 16
+Shares Issued 16
+Total Gain $1,019.04
+Taxable Gain $1,019.04
+Gross Proceeds $0.00
+Total Price $313.44
+Comission/Fee $0.00
+Taxes Withheld $356.66 (Tax Rate / Taxable Gain)
+    Germany $356.66 (35.00000%  / $1,019.04)
+All of this information was provided to E*TRADE Securities LLC, a subsidiary of Morgan Stanley, ("E*TRADE") by your company. E*TRADE does not guarantee the
+accuracy or completeness of the information provided by your company.
+All of the data shown on this statement is based on your company's records. The company reserves the right to make corrections to this data. All awards shown on this
+statement are subject to the terms of the grants of such awards and of the plan under which the grants were made.
+04/17/2025 07:39:27 AM ET Page 1 of 1

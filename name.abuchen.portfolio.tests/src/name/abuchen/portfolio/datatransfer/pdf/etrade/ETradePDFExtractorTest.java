@@ -94,4 +94,34 @@ public class ETradePDFExtractorTest
                         hasAmount("USD", 2691.30), hasGrossValue("USD", 2691.30), //
                         hasTaxes("USD", 0.00), hasFees("USD", 0.00))));
     }
+
+    @Test
+    public void testSecurityInboundDelivery03()
+    {
+        var extractor = new ETradePDFExtractor(new Client());
+
+        List<Exception> errors = new ArrayList<>();
+
+        var results = extractor.extract(PDFInputFile.loadTestCase(getClass(), "InboundDelivery02.txt"), errors);
+
+        assertThat(errors, empty());
+        assertThat(countSecurities(results), is(1L));
+        assertThat(countAccountTransactions(results), is(1L));
+        assertThat(results.size(), is(2));
+        new AssertImportActions().check(results, "USD");
+
+        // check security
+        assertThat(results, hasItem(security( //
+                        hasIsin(null), hasWkn(null), hasTicker("NTAP"), //
+                        hasName("NETAPP,  INC."), //
+                        hasCurrencyCode("USD"))));
+
+        // check buy sell transaction
+        assertThat(results, hasItem(inboundDelivery( //
+                        hasDate("2025-04-14T00:00"), hasShares(16), //
+                        hasSource("InboundDelivery03.txt"), //
+                        hasNote("Taxable Gain $1,019.04"), //
+                        hasAmount("USD", 2691.30), hasGrossValue("USD", 2691.30), //
+                        hasTaxes("USD", 356.66), hasFees("USD", 0.00))));
+    }
 }
